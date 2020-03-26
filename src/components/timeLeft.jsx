@@ -5,10 +5,9 @@ import momentDurationFormatSetup from 'moment-duration-format'
 momentDurationFormatSetup(moment);
 
 const TimeLeft = ({sessionlength ,breaklength}) =>{
-    const [currentSessionType, setCurrentSessionType]  =useState('Session');
+    const [currentSessionType, setCurrentSessionType] =useState('Session');
     const [intervalId, setIntervalId]  = useState(null);
     const [timeLeft, setTimeLeft]  = useState(sessionlength);
-    const  formattedTimeLeft = moment.duration(timeLeft,'s').format('mm:ss',{trim:false});
 
     //change timeleft whenever sessionlength changes, useEffect will listen to the state of session length
     useEffect(
@@ -24,6 +23,7 @@ const TimeLeft = ({sessionlength ,breaklength}) =>{
         if(isStarted){
             clearInterval(intervalId);
             setIntervalId(null)
+
         }else{
             //if u press start the timer will count down
             const newIntervalId =  setInterval(() =>{
@@ -32,30 +32,25 @@ const TimeLeft = ({sessionlength ,breaklength}) =>{
                     if(newTimeLeft >= 0){
                         return prevTimeLeft -1
                     }
-if(currentSessionType === 'Session'){
-setCurrentSessionType('Break');
-setTimeLeft(breaklength);
+                    //if in session, switch to break and set time left to breaklength
+                    if(currentSessionType === 'Session'){
+                        setCurrentSessionType('Break');
+                        setTimeLeft(breaklength);
 
-}else if(currentSessionType === 'Break'){
-    setCurrentSessionType('Session');
-    setTimeLeft(sessionlength);
-}
-                    //once timer reaches 00:00 start the break if ur in session
-                    return prevTimeLeft;
-                } )
-            },10);
+                    }
+                    //if in break, switch to session
+                    else if(currentSessionType === 'Break'){
+                        setCurrentSessionType('Session');
+                        setTimeLeft(sessionlength);
+                    }
+                });
+            },10); // TODO: turn back into 1000
 
-            setIntervalId(newIntervalId)
+            setIntervalId(newIntervalId);
         }
      };
+    const  formattedTimeLeft = moment.duration(timeLeft,'s').format('mm:ss',{trim:false});
 
-
-
-
-    const end  =  ()  => {
-
-
-    };
 
     return  <div>
     <p id='timer-label'> you are in:  {currentSessionType}</p>
