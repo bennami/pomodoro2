@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import Break from "./components/break";
 import './App.css';
 import Session from "./components/session";
+import TimeLeft from "./components/timeLeft";
 
 function App() {
   //5 minutes is 300 seconds
-  const [breaklength, setbreaklength] = useState(60*25);
+  const [breaklength, setbreaklength] = useState(300);
 
   const decrementMinutes =() => {
     const newbreakLength = breaklength -60;
@@ -22,7 +23,7 @@ function App() {
 
 
   //5 minutes is 300 seconds
-  const [sessionlength, setsessionlength] = useState(300);
+  const [sessionlength, setsessionlength] = useState(60*25);
 
   const decrement =() => {
     const newsessionLength = sessionlength -60;
@@ -38,7 +39,10 @@ function App() {
   };
 
   return (
+
     <div className="App">
+    <TimeLeft sessionlength={sessionlength}/>
+
     <Break  breaklength={breaklength}
              decrement ={decrementMinutes}
              increment = {incrementMinutes}/>
@@ -46,6 +50,8 @@ function App() {
     decrement ={decrement}
     increment = {increment}
     />
+
+
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import moment from "moment";
 
 const Session = props => {
@@ -8,7 +8,7 @@ const Session = props => {
 
     return(
         <div>
-            <p id='break-label'>break</p>
+            <p id='break-label'>Session</p>
             <p id="break-length">{sessionLengthInMinutes}</p>
             <button id="break-decrement" onClick={props.decrement}>-</button>
             <button id="break-increment" onClick={props.increment}>+</button>
