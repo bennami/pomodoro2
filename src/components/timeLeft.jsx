@@ -5,8 +5,9 @@ import momentDurationFormatSetup from 'moment-duration-format'
 momentDurationFormatSetup(moment);
 
 const TimeLeft = ({sessionlength}) =>{
+    const [intervalId]  = useState();
     const [timeLeft, setTimeLeft]  = useState(sessionlength);
-    const  formattedTimeLeft = moment.duration(timeLeft,'s').format('mm:ss');
+    const  formattedTimeLeft = moment.duration(timeLeft,'s').format('mm:ss',{trim:false});
 
     //change timeleft whenever sessionlength changes, useEffect will listen to the state of session length
     useEffect(
@@ -17,8 +18,16 @@ const TimeLeft = ({sessionlength}) =>{
 
     //prevtime is a built in method that we can  use for  the setter
     const start = () =>{
-        setInterval(() =>{
-        setTimeLeft(prevTimeLeft => prevTimeLeft -1)
+
+
+    const newIntervalId =    setInterval(() =>{
+             setTimeLeft(prevTimeLeft => {
+                 const newTimeLeft  =  prevTimeLeft -1;
+                 if(newTimeLeft >= 0){
+                     return prevTimeLeft -1
+                 }
+                return prevTimeLeft;
+             } )
         },1000);
     };
 
