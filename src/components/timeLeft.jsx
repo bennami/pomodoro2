@@ -5,7 +5,7 @@ import momentDurationFormatSetup from 'moment-duration-format'
 momentDurationFormatSetup(moment);
 
 const TimeLeft = ({sessionlength}) =>{
-    const [intervalId]  = useState();
+    const [intervalId, setIntervalId]  = useState(null);
     const [timeLeft, setTimeLeft]  = useState(sessionlength);
     const  formattedTimeLeft = moment.duration(timeLeft,'s').format('mm:ss',{trim:false});
 
@@ -16,20 +16,28 @@ const TimeLeft = ({sessionlength}) =>{
         }, [sessionlength]
     );
 
-    //prevtime is a built in method that we can  use for  the setter
+    const isStarted = intervalId != null;
     const start = () =>{
+        if(isStarted){
+
+            clearInterval(intervalId);
+            setIntervalId(null)
+        }else{
+            const newIntervalId =  setInterval(() =>{
+                setTimeLeft(prevTimeLeft => {
+                    const newTimeLeft  =  prevTimeLeft -1;
+                    if(newTimeLeft >= 0){
+                        return prevTimeLeft -1
+                    }
+                    return prevTimeLeft;
+                } )
+            },1000);
+            setIntervalId(newIntervalId)
+        }
+     };
 
 
-    const newIntervalId =    setInterval(() =>{
-             setTimeLeft(prevTimeLeft => {
-                 const newTimeLeft  =  prevTimeLeft -1;
-                 if(newTimeLeft >= 0){
-                     return prevTimeLeft -1
-                 }
-                return prevTimeLeft;
-             } )
-        },1000);
-    };
+
 
     const end  =  ()  => {
 
@@ -38,7 +46,7 @@ const TimeLeft = ({sessionlength}) =>{
 
     return  <div>
     <div>{formattedTimeLeft}</div>
-    <button onClick={start}>start</button>
+    <button onClick={start}> {isStarted? 'Stop': 'Start'}</button>
     <button>end</button>
     </div>
 
