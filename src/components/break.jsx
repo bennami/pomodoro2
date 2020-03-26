@@ -4,8 +4,7 @@ import moment from "moment";
 const Break = props => {
 
     //using moment library, we can convert seconds  to minutes
-    const breakLengthInMinutes = moment.duration(props.breaklength, 's').minutes()
-
+    const breakLengthInMinutes = moment.duration(props.breaklength, 's').asMinutes();
     return(
         <div>
             <p id='session-label'>Break</p>
