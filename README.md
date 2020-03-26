@@ -1,3 +1,9 @@
+
+## Remake of pomodoro using moment library to convert  seconds  to minutes  easily
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
