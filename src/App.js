@@ -41,7 +41,7 @@ function App() {
   return (
 
     <div className="App">
-    <TimeLeft sessionlength={sessionlength}/>
+    <TimeLeft sessionlength={sessionlength} breaklength={breaklength}/>
 
     <Break  breaklength={breaklength}
              decrement ={decrementMinutes}
