@@ -5,7 +5,7 @@ import Session from "./components/session";
 import TimeLeft from "./components/timeLeft";
 
 function App() {
- const audioElement = useRef(null);
+  const audioElement = useRef(null);
   const [currentSessionType, setCurrentSessionType] = useState('Session');
   const [intervalId, setIntervalId]  = useState(null);
   const [breaklength, setbreaklength] = useState(5*60);
@@ -23,9 +23,7 @@ function App() {
     const newbreakLength = breaklength +60;
     if(newbreakLength <= 60*60){
       setbreaklength(newbreakLength);
-
     }
-
   };
 
   const decrement =() => {
@@ -44,31 +42,31 @@ function App() {
   //initial state is not null so the when u start the timer for the first time it can work
   const isStarted = intervalId != null;
   const start = () =>{
-    //once ur in start mode, button shows 'stop' and if you click it it will stop the timer
+    //once ur in start mode, button shows 'stop' and if you click it it will stop the timer and go back to start
     if(isStarted){
       clearInterval(intervalId);
       setIntervalId(null)
-
     }else{
-      //if u press start the timer will count down
+      //if u press start the timer will start count down
       const newIntervalId =  setInterval(() =>{
-        setTimeLeft(prevTimeLeft => {
+          setTimeLeft(prevTimeLeft => {
           const newTimeLeft  =  prevTimeLeft -1;
           if(newTimeLeft >= 0){
             return newTimeLeft;
           }
 
-          //timeleft is - 0
+          // when timeleft is 0:
           audioElement.current.play();
           //if in session, switch to break and set time left to breaklength
           if(currentSessionType === 'Session' ){
-
             setCurrentSessionType('Break');
             return breaklength
           }
-          //if in break, switch to session
-          else if(currentSessionType === 'Break'){
 
+          //if in break, switch to session
+              //TODO: FIX THIS ERROR
+          /////////?????????for some reason this doesnt get executed yet????????????
+          else if(currentSessionType === 'Break'){
             setCurrentSessionType('Session');
             return sessionlength
           }
@@ -84,7 +82,6 @@ function App() {
   };
 
   const handleResetButtonClick = () => {
-
     //reset audio
     audioElement.current.load();
     //clear timeout interval
@@ -105,21 +102,21 @@ function App() {
   return (
 
     <div className="App">
-    <TimeLeft sessionlength={sessionlength}
-              start={start}
-              startStopButtonLabel={isStarted? 'Stop': 'Start'}
-              timerLabel={currentSessionType} breaklength={breaklength}
-    timeLeft={timeLeft}
-    />
+      <TimeLeft sessionlength={sessionlength}
+                start={start}
+                startStopButtonLabel={isStarted? 'Stop': 'Start'}
+                timerLabel={currentSessionType} breaklength={breaklength}
+                timeLeft={timeLeft}
+      />
 
-    <Break  breaklength={breaklength}
-             decrement ={decrementMinutes}
-             increment = {incrementMinutes}/>
-    <Session  sessionlength={sessionlength}
-    decrement ={decrement}
-    increment = {increment}
-    />
-    <button id="reset" onClick={handleResetButtonClick}>reset</button>
+      <Break  breaklength={breaklength}
+              decrement ={decrementMinutes}
+              increment = {incrementMinutes}/>
+      <Session  sessionlength={sessionlength}
+      decrement ={decrement}
+      increment = {increment}
+      />
+      <button id="reset" onClick={handleResetButtonClick}>reset</button>
       <audio id="beep" ref={audioElement}>
       <source src="https://onlineclock.net/audio/options/default.mp3" type="audio/mpeg"/>
       </audio>
