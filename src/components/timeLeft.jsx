@@ -1,63 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import moment from "moment";
 import momentDurationFormatSetup from 'moment-duration-format'
 
 momentDurationFormatSetup(moment);
 
-const TimeLeft = ({sessionlength ,breaklength}) =>{
-    const [currentSessionType, setCurrentSessionType] =useState('Session');
-    const [intervalId, setIntervalId]  = useState(null);
-    const [timeLeft, setTimeLeft]  = useState(sessionlength);
+const TimeLeft = ({startStopButtonLabel,start, timerLabel, timeLeft}) =>{
 
-    //change timeleft whenever sessionlength changes, useEffect will listen to the state of session length
-    useEffect(
-        () => {
-        setTimeLeft(sessionlength)
-        }, [sessionlength]
-    );
-
-    //initial state is not null so the when u start the timer for the first time it can work
-    const isStarted = intervalId != null;
-    const start = () =>{
-        //once ur in start mode, button shows 'stop' and if you click it it will stop the timer
-        if(isStarted){
-            clearInterval(intervalId);
-            setIntervalId(null)
-
-        }else{
-            //if u press start the timer will count down
-            const newIntervalId =  setInterval(() =>{
-                setTimeLeft(prevTimeLeft => {
-                    const newTimeLeft  =  prevTimeLeft -1;
-                    if(newTimeLeft >= 0){
-                        return prevTimeLeft -1
-                    }
-                    //if in session, switch to break and set time left to breaklength
-                    if(currentSessionType === 'Session'){
-                        setCurrentSessionType('Break');
-                        setTimeLeft(breaklength);
-
-                    }
-                    //if in break, switch to session
-                    else if(currentSessionType === 'Break'){
-                        setCurrentSessionType('Session');
-                        setTimeLeft(sessionlength);
-                    }
-                });
-            },10); // TODO: turn back into 1000
-
-            setIntervalId(newIntervalId);
-        }
-     };
     const  formattedTimeLeft = moment.duration(timeLeft,'s').format('mm:ss',{trim:false});
 
-
     return  <div>
-    <p id='timer-label'> you are in:  {currentSessionType}</p>
+    <p id='timer-label'> you are in:  {timerLabel}</p>
     <div>{formattedTimeLeft}</div>
-
-    <button onClick={start}> {isStarted? 'Stop': 'Start'}</button>
-    <button>end</button>
+    <button onClick={start}>{startStopButtonLabel}</button>
     </div>
 
 };
