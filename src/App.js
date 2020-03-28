@@ -39,40 +39,37 @@ function App() {
         setTimeLeft(sessionlength)
       }, [sessionlength]
   );
+
+//listen change session to break
+    useEffect(() => {
+       if(timeLeft === 0){
+           //play audio
+           audioElement.current.play();
+           if(currentSessionType === 'Session'){
+               setCurrentSessionType('Break');
+               setTimeLeft(breaklength)
+           }else if(currentSessionType ==='Break'){
+               setCurrentSessionType('Session');
+               setTimeLeft(sessionlength)
+           }
+       }
+    },[breaklength, sessionlength, setTimeLeft, currentSessionType,]);
+
+
   //initial state is not null so the when u start the timer for the first time it can work
   const isStarted = intervalId != null;
-  const start = () =>{
+  const start = () =>  {
     //once ur in start mode, button shows 'stop' and if you click it it will stop the timer and go back to start
     if(isStarted){
       clearInterval(intervalId);
       setIntervalId(null)
     }else{
+
       //if u press start the timer will start count down
-      const newIntervalId =  setInterval(() =>{
-          setTimeLeft(prevTimeLeft => {
-          const newTimeLeft  =  prevTimeLeft -1;
-          if(newTimeLeft >= 0){
-            return newTimeLeft;
-          }
+      const newIntervalId =  setInterval(() => {
+          setTimeLeft(prevTimeLeft =>   prevTimeLeft -1);
 
-          // when timeleft is 0:
-          audioElement.current.play();
-          //if in session, switch to break and set time left to breaklength
-          if(currentSessionType === 'Session' ){
-            setCurrentSessionType('Break');
-            return breaklength
-          }
-
-          //if in break, switch to session
-              //TODO: FIX THIS ERROR
-          /////////?????????for some reason this doesnt get executed yet????????????
-          else if(currentSessionType === 'Break'){
-            setCurrentSessionType('Session');
-            return sessionlength
-          }
-
-        });
-      },10); // TODO: turn back into 1000
+      },1000); // TODO: turn back into 1000
       setIntervalId(newIntervalId);
     }
   };
