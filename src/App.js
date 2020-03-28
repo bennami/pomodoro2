@@ -53,23 +53,24 @@ function App() {
                setTimeLeft(sessionlength)
            }
        }
-    },[breaklength, sessionlength, setTimeLeft, currentSessionType,]);
+    },[breaklength, sessionlength, setTimeLeft, currentSessionType,timeLeft ]);
 
 
+
+    console.log(currentSessionType);
   //initial state is not null so the when u start the timer for the first time it can work
   const isStarted = intervalId != null;
-  const start = () =>  {
+  const start = () =>{
     //once ur in start mode, button shows 'stop' and if you click it it will stop the timer and go back to start
     if(isStarted){
       clearInterval(intervalId);
       setIntervalId(null)
     }else{
-
+      let test =currentSessionType;
       //if u press start the timer will start count down
-      const newIntervalId =  setInterval(() => {
-          setTimeLeft(prevTimeLeft =>   prevTimeLeft -1);
-
-      },1000); // TODO: turn back into 1000
+      const newIntervalId =  setInterval(() =>{
+          setTimeLeft(prevTimeLeft =>  prevTimeLeft -1);
+      },100); // TODO: turn back into 1000
       setIntervalId(newIntervalId);
     }
   };
