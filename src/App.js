@@ -12,25 +12,29 @@ function App() {
   const [sessionlength, setsessionlength] = useState(60*25);
   const [timeLeft, setTimeLeft]  = useState(sessionlength);
 
-  const decrementMinutes =() => {
+  const decrementBreak =() => {
     const newbreakLength = breaklength -60;
     if(newbreakLength>0){
       setbreaklength(newbreakLength);
     }
   };
 
-  const incrementMinutes =()=>{
+  const incrementBreak =()=>{
     const newbreakLength = breaklength +60;
     if(newbreakLength <= 60*60){
       setbreaklength(newbreakLength);
     }
   };
 
-  const decrement =() => {
+  const decrementSession =() => {
     const newsessionLength = sessionlength -60;
     if(newsessionLength > 0) {
       setsessionlength(newsessionLength)
     }
+  };
+
+  const incrementSession =() => {
+      setsessionlength(sessionlength+60)
   };
 
   //change timeLeft whenever sessionLength changes, useEffect will listen to the state of session length
@@ -40,7 +44,8 @@ function App() {
       }, [sessionlength]
   );
 
-//listen change session to break
+    //listens to any changes in the dependencies, runds the code only when timeLeft === 0.
+    // this will switch from session to break and play a sound
     useEffect(() => {
        if(timeLeft === 0){
            //play audio
@@ -55,10 +60,7 @@ function App() {
        }
     },[breaklength, sessionlength, setTimeLeft, currentSessionType,timeLeft ]);
 
-
-
-    console.log(currentSessionType);
-  //initial state is not null so the when u start the timer for the first time it can work
+  //initial state is not null so the when u start the timer for the first time it can work properly
   const isStarted = intervalId != null;
   const start = () =>{
     //once ur in start mode, button shows 'stop' and if you click it it will stop the timer and go back to start
@@ -66,19 +68,15 @@ function App() {
       clearInterval(intervalId);
       setIntervalId(null)
     }else{
-      let test =currentSessionType;
       //if u press start the timer will start count down
       const newIntervalId =  setInterval(() =>{
           setTimeLeft(prevTimeLeft =>  prevTimeLeft -1);
-      },100); // TODO: turn back into 1000
+      },1000);
       setIntervalId(newIntervalId);
     }
   };
 
-  const increment =()=>{
-    setsessionlength(sessionlength+60)
-  };
-
+  //reset button
   const handleResetButtonClick = () => {
     //reset audio
     audioElement.current.load();
@@ -108,11 +106,11 @@ function App() {
       />
 
       <Break  breaklength={breaklength}
-              decrement ={decrementMinutes}
-              increment = {incrementMinutes}/>
+              decrement ={decrementBreak}
+              increment = {incrementBreak}/>
       <Session  sessionlength={sessionlength}
-      decrement ={decrement}
-      increment = {increment}
+      decrement ={decrementSession}
+      increment = {incrementSession}
       />
       <button id="reset" onClick={handleResetButtonClick}>reset</button>
       <audio id="beep" ref={audioElement}>
