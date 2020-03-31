@@ -6,7 +6,7 @@ const Break = props => {
     //using moment library, we can convert seconds  to minutes
     const breakLengthInMinutes = moment.duration(props.breaklength, 's').asMinutes();
     return(
-        /*// added the className below just to confirm Tailwind works!*/
+     
         <div>
             <p id='session-label'>Break</p>
             <p id="session-length">{breakLengthInMinutes}</p>
