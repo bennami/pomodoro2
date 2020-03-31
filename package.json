@@ -1,4 +1,5 @@
 {
+  "homepage": "http://bennami.github.io/pomodoro2/",
   "name": "second-try-pomodoro",
   "version": "0.1.0",
   "private": true,
@@ -20,6 +21,8 @@
     "typescript": "^3.8.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "npm run watch:css && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -40,6 +43,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.7.5",
+    "gh-pages": "^2.2.0",
     "postcss-cli": "^7.1.0",
     "tailwindcss": "^1.2.0"
   }
