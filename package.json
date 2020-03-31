@@ -29,6 +29,7 @@
     "eject": "react-scripts eject",
     "watch:css": "npx postcss src/assets/tailwind.css -o src/assets/main.css"
   },
+
   "browserslist": {
     "production": [
       ">0.2%",
