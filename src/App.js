@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Break from "./components/break";
-import './App.css';
+import './assets/main.css';
 import Session from "./components/session";
 import TimeLeft from "./components/timeLeft";
 
