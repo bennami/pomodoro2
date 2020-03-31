@@ -10,8 +10,8 @@ const Session = props => {
         <div>
             <p id='break-label'>Session</p>
             <p id="break-length">{sessionLengthInMinutes}</p>
-            <button id="break-decrement" onClick={props.decrement}>-</button>
-            <button id="break-increment" onClick={props.increment}>+</button>
+            <button  className="border-2 border-blue-900   hover:bg-blue-900 text-blue-900 hover:text-white font-bold px-2 m-1 rounded" id="break-decrement" onClick={props.decrement}>-</button>
+            <button className="border-2 border-blue-900   hover:bg-blue-900 text-blue-900 hover:text-white font-bold px-2 m-1 rounded" id="break-increment" onClick={props.increment}>+</button>
         </div>
     )
 };

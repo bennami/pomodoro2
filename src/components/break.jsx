@@ -7,11 +7,11 @@ const Break = props => {
     const breakLengthInMinutes = moment.duration(props.breaklength, 's').asMinutes();
     return(
         // added the className below just to confirm Tailwind works!
-        <div className="bg-red-600">
+        <div>
             <p id='session-label'>Break</p>
             <p id="session-length">{breakLengthInMinutes}</p>
-            <button id="session-decrement" onClick={props.decrement}>-</button>
-            <button id="session-increment" onClick={props.increment}>+</button>
+            <button className="border-2 border-blue-900 hover:bg-blue-900 text-blue-900 hover:text-white px-2 m-1 rounded" id="session-decrement" onClick={props.decrement}>-</button>
+            <button className="border-2 border-blue-900 hover:bg-blue-900 text-blue-900 hover:text-white px-2 m-1 rounded" id="session-increment" onClick={props.increment}>+</button>
         </div>
     )
 };

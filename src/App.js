@@ -97,26 +97,34 @@ function App() {
 
   return (
 
-    <div className="App">
-      <TimeLeft sessionlength={sessionlength}
+    <div className="App flex flex-col h-screen items-center justify-center  text-center bg-blue-200 ">
+      <div className="flex bg-gray-100 rounded">
+        <TimeLeft sessionlength={sessionlength}
                 start={start}
                 startStopButtonLabel={isStarted? 'Stop': 'Start'}
                 timerLabel={currentSessionType} breaklength={breaklength}
                 timeLeft={timeLeft}
-      />
+                handleResetButtonClick={handleResetButtonClick}
+        />
+      </div>
 
+    <div  className=" bg-gray-100 rounded flex text-center text-lg m-2 p-1">
       <Break  breaklength={breaklength}
               decrement ={decrementBreak}
               increment = {incrementBreak}/>
+
       <Session  sessionlength={sessionlength}
       decrement ={decrementSession}
       increment = {incrementSession}
       />
-      <button id="reset" onClick={handleResetButtonClick}>reset</button>
+    </div>
+
       <audio id="beep" ref={audioElement}>
       <source src="https://onlineclock.net/audio/options/default.mp3" type="audio/mpeg"/>
       </audio>
+
     </div>
+
   );
 }
 
