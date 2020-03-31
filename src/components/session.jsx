@@ -3,7 +3,6 @@ import moment from "moment";
 
 const Session = props => {
 
-    //using moment library, we can convert seconds  to minutes
     const sessionLengthInMinutes = moment.duration(props.sessionlength, 's').minutes();
 
     return(

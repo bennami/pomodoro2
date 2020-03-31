@@ -13,7 +13,6 @@ const TimeLeft = ({startStopButtonLabel,start, timerLabel, timeLeft, handleReset
     <div className="text-5xl">{formattedTimeLeft}</div>
     <button className="border-2 border-blue-900   hover:bg-blue-900 text-blue-900 hover:text-white font-bold px-2 m-2 rounded" onClick={start}>{startStopButtonLabel}</button>
     <button className="border-2 border-blue-900   hover:bg-blue-900 text-blue-900 hover:text-white font-bold px-2 m-2 rounded" id="reset" onClick={handleResetButtonClick}>reset</button>
-
     </div>
     )
 

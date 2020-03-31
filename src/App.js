@@ -37,15 +37,14 @@ function App() {
       setsessionlength(sessionlength+60)
   };
 
-  //change timeLeft whenever sessionLength changes, useEffect will listen to the state of session length
+
   useEffect(
       () => {
         setTimeLeft(sessionlength)
       }, [sessionlength]
   );
 
-    //listens to any changes in the dependencies, runds the code only when timeLeft === 0.
-    // this will switch from session to break and play a sound
+
     useEffect(() => {
        if(timeLeft === 0){
            //play audio
@@ -60,15 +59,14 @@ function App() {
        }
     },[breaklength, sessionlength, setTimeLeft, currentSessionType,timeLeft ]);
 
-  //initial state is not null so the when u start the timer for the first time it can work properly
+
   const isStarted = intervalId != null;
   const start = () =>{
-    //once ur in start mode, button shows 'stop' and if you click it it will stop the timer and go back to start
-    if(isStarted){
+ if(isStarted){
       clearInterval(intervalId);
       setIntervalId(null)
     }else{
-      //if u press start the timer will start count down
+
       const newIntervalId =  setInterval(() =>{
           setTimeLeft(prevTimeLeft =>  prevTimeLeft -1);
       },1000);
@@ -76,21 +74,14 @@ function App() {
     }
   };
 
-  //reset button
+
   const handleResetButtonClick = () => {
-    //reset audio
     audioElement.current.load();
-    //clear timeout interval
     clearInterval(intervalId);
-    //set interval to null
     setIntervalId(null);
-    //set session type to session
     setCurrentSessionType('Session');
-    //reset session length to 25 min
     setsessionlength(25*60);
-    //reset break length to 5 min
     setbreaklength(5*60);
-    // reset timer to 25 min
     setTimeLeft(25*60)
 
   };
