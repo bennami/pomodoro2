@@ -22,7 +22,7 @@
     "webpac": "^1.0.1"
   },
   "scripts": {
-    "predeploy": "npm build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "npm run watch:css && react-scripts start",
     "build": "react-scripts build",
