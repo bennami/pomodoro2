@@ -63,5 +63,20 @@
     "style-loader": "^0.21.0",
     "tailwindcss": "^1.2.0",
     "uglifyjs-webpack-plugin": "^1.2.5"
-  }
+  },
+  "main": "postcss.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bennami/pomodoro2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bennami/pomodoro2/issues"
+  },
+  "description": ""
 }
