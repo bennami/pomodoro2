@@ -1,6 +1,8 @@
 # pomodoro2
 
-pomodoro timer that runs in an endless loop from work session to break
+pomodoro timer that runs in an endless loop from work session to break.
+
+using react hooks
 
 [link to timer](https://bennami.github.io/pomodoro2/)
 
