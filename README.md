@@ -2,4 +2,7 @@
 
 pomodoro timer that runs in an endless loop from work session to break
 
-[##use the timer](https://bennami.github.io/pomodoro2/)
+[link to timer](https://bennami.github.io/pomodoro2/)
+
+![preview](https://raw.githubusercontent.com/bennami/pomodoro2/preview.png)
+
