@@ -89,7 +89,7 @@ function App() {
 
   return (
 
-    <div className="App flex h-screen items-center justify-center w-56 text-center bg-blue-200 ">
+    <div className="App flex h-screen items-center justify-center  text-center bg-blue-200 ">
         <div className="flex-col bg-blue-900 m-4 rounded p-4">
       <div className="flex bg-gray-100 justify-center items-center rounded text-center ">
         <TimeLeft sessionlength={sessionlength}
