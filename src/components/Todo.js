@@ -46,13 +46,13 @@ function Todo (){
     };
 
     const listItems = items.map( item => {
-        return <div className={'list'} key={item.currentItem.key}>
-                <p className="relative p-2 bg-white  rounded m-1">{item.currentItem.text}<span ><button  className=" p-1 bg-green-200 rounded m-1 absolute cursor-pointer" onClick={()=> deleteItem(item.currentItem.key)}>X</button></span></p>
+        return <div className={'list flex justify-between'} key={item.currentItem.key}>
+                <p className="relative p-1 bg-white  rounded m-1">{item.currentItem.text}<span ><button  className=" pl-2 pr-2  ml-5 bg-green-200 rounded ml-4  cursor-pointer " onClick={()=> deleteItem(item.currentItem.key)}>X</button></span></p>
                </div>
     });
 
     return (
-        <div className="bg-blue-900 ml-2 flex flex-col rounded p-2">
+        <div className="bg-blue-900 m-2 p-2 flex flex-col rounded max-w-md">
             <h1 className="text-white font-medium">To Do</h1>
             <form id="form" onSubmit={addItem}>
                 <div className={"form-container"}>

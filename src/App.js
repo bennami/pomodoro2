@@ -89,9 +89,9 @@ function App() {
 
   return (
 
-    <div className="App flex  h-screen items-center justify-center  text-center bg-blue-200 ">
-        <div className="flex-col">
-      <div className="flex   bg-gray-100 rounded">
+    <div className="App flex h-screen items-center justify-center w-56 text-center bg-blue-200 ">
+        <div className="flex-col bg-blue-900 m-4 rounded p-4">
+      <div className="flex bg-gray-100 justify-center items-center rounded text-center ">
         <TimeLeft sessionlength={sessionlength}
                 start={start}
                 startStopButtonLabel={isStarted? 'Stop': 'Start'}
@@ -101,8 +101,9 @@ function App() {
         />
       </div>
 
-    <div  className=" bg-gray-100 rounded flex text-center text-lg m-2 p-1">
-      <Break  breaklength={breaklength}
+    <div  className=" flex-col mt-2 text-center justify-center items-center bg-gray-100 rounded">
+      <div className={'flex justify-center'}>
+        <Break  breaklength={breaklength}
               decrement ={decrementBreak}
               increment = {incrementBreak}/>
 
@@ -110,13 +111,17 @@ function App() {
       decrement ={decrementSession}
       increment = {incrementSession}
       />
+      </div>
+        <div  className=" flex justify-center items-center ">
+            <Todo  className=""/>
+        </div>
     </div>
 
       <audio id="beep" ref={audioElement}>
       <source src="https://onlineclock.net/audio/options/default.mp3" type="audio/mpeg"/>
       </audio>
-        </div>
-    <Todo  className=""/>
+     </div>
+
 
     </div>
 
